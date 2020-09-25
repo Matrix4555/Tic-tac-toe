@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/imgs">
+        <file>images/cross2.0.png</file>
+        <file>images/ring2.0.png</file>
+        <file>images/HvsH.png</file>
+        <file>images/HvsAI.png</file>
+        <file>images/dif1.png</file>
+        <file>images/dif2.png</file>
+        <file>images/dif3.png</file>
+        <file>images/logo.png</file>
+        <file>images/langEng.png</file>
+        <file>images/langRus.png</file>
+        <file>images/skyBackground.png</file>
+        <file>images/carBackground.png</file>
+        <file>images/cityBackground.png</file>
+        <file>images/gameBackground.png</file>
+        <file>images/logoico.ico</file>
+    </qresource>
+</RCC>

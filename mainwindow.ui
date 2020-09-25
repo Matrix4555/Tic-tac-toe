@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>580</width>
+    <height>750</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>580</width>
+    <height>750</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>580</width>
+    <height>750</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="imgs.qrc">
+    <normaloff>:/imgs/images/logo.png</normaloff>:/imgs/images/logo.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGroupBox" name="groupBox_data">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>541</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox
+{
+	color: rgb(170, 0, 255)
+}
+</string>
+    </property>
+    <property name="title">
+     <string>Data</string>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <widget class="QLabel" name="whoWalks">
+     <property name="geometry">
+      <rect>
+       <x>318</x>
+       <y>19</y>
+       <width>75</width>
+       <height>75</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>69</width>
+       <height>69</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel
+{
+color: 
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>421</x>
+       <y>10</y>
+       <width>121</width>
+       <height>90</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label_score">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+          <pointsize>19</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel
+{
+color: rgb(0, 200, 90)
+}</string>
+        </property>
+        <property name="text">
+         <string>Score:</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_scoreRing">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+            <pointsize>20</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel
+{
+color: rgb(62, 197, 243)
+}</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+            <pointsize>24</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel
+{
+color: rgb(96, 200, 90)
+}</string>
+          </property>
+          <property name="text">
+           <string>:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_scoreCross">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Comic Sans MS</family>
+            <pointsize>20</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel
+{
+color: rgb(255, 97, 95)
+}</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLabel" name="label_whoWalks">
+     <property name="geometry">
+      <rect>
+       <x>195</x>
+       <y>41</y>
+       <width>113</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Comic Sans MS</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>false</underline>
+       <stylestrategy>PreferDefault</stylestrategy>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel
+{
+color: rgb(0, 200, 90)
+}</string>
+     </property>
+     <property name="text">
+      <string>Who walks: </string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>171</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_stepsDone">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel
+{
+color: rgb(0, 200, 90)
+}</string>
+        </property>
+        <property name="text">
+         <string>Steps done:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_countSteps">
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel
+{
+color: rgb(0, 200, 90)
+}</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_field">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>541</width>
+      <height>581</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Comic Sans MS</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QGroupBox
+{
+color: rgb(170, 0, 255)
+}</string>
+    </property>
+    <property name="title">
+     <string>Field of Game</string>
+    </property>
+    <widget class="QPushButton" name="pushButton_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>48</y>
+       <width>170</width>
+       <height>170</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>170</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+background: rgba(255,255,255,100);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_8">
+     <property name="geometry">
+      <rect>
+       <x>186</x>
+       <y>48</y>
+       <width>170</width>
+       <height>170</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>170</height>
+      </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+background: rgba(255,255,255,100);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_9">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>362</x>
+       <y>48</y>
+       <width>170</width>
+       <height>170</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>170</height>
+      </size>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+background: rgba(255,255,255,100);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>224</y>
+       <width>170</width>
+       <height>170</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>170</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+background: rgba(255,255,255,100);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="geometry">
+      <rect>
+       <x>186</x>
+       <y>224</y>
+       <width>170</width>
+       <height>170</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>170</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+background: rgba(255,255,255,100);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_6">
+     <property name="geometry">
+      <rect>
+       <x>362</x>
+       <y>224</y>
+       <width>170</width>
+       <height>170</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>170</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+background: rgba(255,255,255,100);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_1">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>400</y>
+       <width>170</width>
+       <height>170</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>170</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+background: rgba(255,255,255,100);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>186</x>
+       <y>400</y>
+       <width>170</width>
+       <height>170</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>170</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+background: rgba(255,255,255,100);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>362</x>
+       <y>400</y>
+       <width>170</width>
+       <height>170</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>170</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+background: rgba(255,255,255,100);
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>580</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <widget class="QMenu" name="menuLanguage">
+     <property name="title">
+      <string>Language</string>
+     </property>
+     <addaction name="separator"/>
+     <addaction name="actionEnglish"/>
+     <addaction name="actionRussian"/>
+    </widget>
+    <widget class="QMenu" name="menuBackground">
+     <property name="title">
+      <string>Background</string>
+     </property>
+     <addaction name="actionDefault"/>
+     <addaction name="actionDark"/>
+     <addaction name="actionSunset"/>
+     <addaction name="actionGame"/>
+     <addaction name="actionCity"/>
+     <addaction name="actionCar"/>
+    </widget>
+    <addaction name="menuLanguage"/>
+    <addaction name="menuBackground"/>
+   </widget>
+   <widget class="QMenu" name="menuNewGame">
+    <property name="title">
+     <string>New game</string>
+    </property>
+    <addaction name="actionNew_game_1_vs_1"/>
+    <addaction name="actionNew_game_1_vs_AI"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout_game">
+    <property name="title">
+     <string>About game</string>
+    </property>
+    <addaction name="actionInformation"/>
+    <addaction name="actionCurrent_version"/>
+   </widget>
+   <addaction name="menuNewGame"/>
+   <addaction name="menuOptions"/>
+   <addaction name="menuAbout_game"/>
+  </widget>
+  <action name="actionNew_game_1_vs_1">
+   <property name="text">
+    <string>1 vs 1</string>
+   </property>
+  </action>
+  <action name="actionNew_game_1_vs_AI">
+   <property name="text">
+    <string>1 vs AI</string>
+   </property>
+  </action>
+  <action name="actionInformation">
+   <property name="text">
+    <string>Information</string>
+   </property>
+  </action>
+  <action name="actionCurrent_version">
+   <property name="text">
+    <string>Current version</string>
+   </property>
+  </action>
+  <action name="actionEnglish">
+   <property name="icon">
+    <iconset resource="imgs.qrc">
+     <normaloff>:/imgs/images/langEng.png</normaloff>:/imgs/images/langEng.png</iconset>
+   </property>
+   <property name="text">
+    <string>English</string>
+   </property>
+  </action>
+  <action name="actionRussian">
+   <property name="icon">
+    <iconset resource="imgs.qrc">
+     <normaloff>:/imgs/images/langRus.png</normaloff>:/imgs/images/langRus.png</iconset>
+   </property>
+   <property name="text">
+    <string>Russian</string>
+   </property>
+  </action>
+  <action name="actionDefault">
+   <property name="text">
+    <string>Default</string>
+   </property>
+  </action>
+  <action name="actionDark">
+   <property name="text">
+    <string>Dark</string>
+   </property>
+  </action>
+  <action name="actionSunset">
+   <property name="text">
+    <string>Sunset</string>
+   </property>
+  </action>
+  <action name="actionGame">
+   <property name="text">
+    <string>Game</string>
+   </property>
+  </action>
+  <action name="actionCity">
+   <property name="text">
+    <string>City</string>
+   </property>
+  </action>
+  <action name="actionCar">
+   <property name="text">
+    <string>Car</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="imgs.qrc"/>
+ </resources>
+ <connections/>
+</ui>
