@@ -6,7 +6,7 @@ chooseFigure::chooseFigure(QWidget *parent) :
     ui(new Ui::chooseFigure)
 {
     ui->setupUi(this);
-
+    //----------------
 
     setWindowTitle("Figures");
     setWindowFlags(Qt::WindowTitleHint);
