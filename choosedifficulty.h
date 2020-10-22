@@ -16,7 +16,7 @@ public:
     ~chooseDifficulty();
     //------------------
 
-    void changeText(QString);
+    void changeText(QString);   // change text on the top of this window
 
 private slots:
     void on_pushButton_selectRing_clicked();
