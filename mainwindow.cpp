@@ -1,24 +1,17 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QMessageBox>
-#include "choosefigure.h"
-#include "chooserealorai.h"
-#include "choosedifficulty.h"
-#include <ctime>
-#include <QTime>
 
-enum localization{ENG, RUS};
+enum localization   { ENG, RUS };
+enum difficulty     { EASY, NORMAL, HARD };
+
 localization language = ENG;
-
-bool mode;          //false is without ai; true is with ai
-enum difficulty {EASY, NORMAL, HARD};
 difficulty level;
 
-bool figure;        //false is cross; true is ring
-QLabel* image[9];
-int stepsForCode;
+bool mode;          // false is without ai;     true is with ai
+bool figure;        // false is cross;          true is ring
 
 int steps;
+int stepsForCode;
 int crossScore;
 int ringScore;
 
@@ -27,7 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //---------------------------------------------------------------------
+    //----------------
+
     setWindowTitle("Tic-tac-toe");
 
     connect(ui->pushButton_1, SIGNAL(clicked()), this, SLOT(realAction()));
@@ -47,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     select2.exec();
 
     for(int i = 0; i < 9; i++)
-        image[i]=nullptr;
+        image[i] = nullptr;
 }
 
 MainWindow::~MainWindow()
@@ -57,11 +51,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::realAction()
 {
-    QPushButton* button = (QPushButton*)sender();                       //clarify what's button get clicked
+    QPushButton* button = (QPushButton*)sender();                       // clarify what's button get clicked
 
     int index = 1;
     for(; index <= 9; index++)
-        if(button->objectName().contains(QString::number(index)))       //find needed digit for image index from name of button (e.g. button 1 is index 0 etc)
+        if(button->objectName().contains(QString::number(index)))       // find needed digit for image index from name of button (e.g. button 1 is index 0 etc)
         {
             index--;
             break;
@@ -69,12 +63,12 @@ void MainWindow::realAction()
 
     setImage(index, button);
 
-    if(mode)                        //if play with ai
+    if(mode)                        // if play with ai
     {
         QPushButton* tempButton;
-        int temp = AIAction();      //set ai's image index
+        int temp = AIAction();      // set ai's image index
 
-        switch(temp)                //set ai's button
+        switch(temp)                // set ai's button
         {
         case 0:
             tempButton = ui->pushButton_1;
@@ -113,11 +107,11 @@ void MainWindow::setImage(int index, QPushButton* button)
 {
     QPixmap cross(":/imgs/images/cross2.0.png"), ring(":/imgs/images/ring2.0.png");
 
-    image[index] = new QLabel(this);                                                                  //create a new image
+    image[index] = new QLabel(this);                                                                  // create a new image
     image[index]->setVisible(true);
-    image[index]->setGeometry(button->x()+20, button->y()+140, button->width(), button->height());    //place an image from data of acted button
+    image[index]->setGeometry(button->x()+20, button->y()+140, button->width(), button->height());    // place an image from data of acted button
 
-    if(figure)      //ring
+    if(figure)      // ring
     {
         image[index]->setPixmap(ring);
         image[index]->setScaledContents(true);
@@ -128,7 +122,7 @@ void MainWindow::setImage(int index, QPushButton* button)
         else
             ui->statusbar->showMessage("Кружок сделал ход");
     }
-    else            //cross
+    else            // cross
     {
         image[index]->setPixmap(cross);
         image[index]->setScaledContents(true);
@@ -153,44 +147,48 @@ int MainWindow::AIAction()
    srand(time(NULL));
    int way = -1;
 
-   if(level==EASY || !closeVictoryControl(way))     //if mode is easy always random step will occur also if mode isn't easy and
-       while(true)                                  //ai doesn't feel "close victory for self or enemy" it will select random step too
+   if(level==EASY || !closeVictoryControl(way))     // if mode is easy always random step will occur also if mode isn't easy and
+       while(true)                                  // ai doesn't feel "close victory for self or enemy" it will select random step too
        {
            way = rand() % 9;
            if(image[way]==nullptr)
                break;
        }
 
-    return way;     //return ai's image index
+    return way;     // return ai's image index
 }
 
 void MainWindow::victoryCheck()
 {
-    if(image[6]!=nullptr && image[7]!=nullptr && image[8]!=nullptr &&
-            (*image[6]->pixmap() == *image[7]->pixmap()) && (*image[7]->pixmap() == *image[8]->pixmap()))
-        gameOver();
-    else if(image[3]!=nullptr && image[4]!=nullptr && image[5]!=nullptr &&
-            (*image[3]->pixmap() == *image[4]->pixmap()) && (*image[4]->pixmap() == *image[5]->pixmap()))
-        gameOver();
-    else if(image[0]!=nullptr && image[1]!=nullptr && image[2]!=nullptr &&
-            (*image[0]->pixmap() == *image[1]->pixmap()) && (*image[1]->pixmap() == *image[2]->pixmap()))
-        gameOver();
-    else if(image[6]!=nullptr && image[3]!=nullptr && image[0]!=nullptr &&
-            (*image[6]->pixmap() == *image[3]->pixmap()) && (*image[3]->pixmap() == *image[0]->pixmap()))
-        gameOver();
-    else if(image[7]!=nullptr && image[4]!=nullptr && image[1]!=nullptr &&
-            (*image[7]->pixmap() == *image[4]->pixmap()) && (*image[4]->pixmap() == *image[1]->pixmap()))
-        gameOver();
-    else if(image[8]!=nullptr && image[5]!=nullptr && image[2]!=nullptr &&
-            (*image[8]->pixmap() == *image[5]->pixmap()) && (*image[5]->pixmap() == *image[2]->pixmap()))
-        gameOver();
-    else if(image[6]!=nullptr && image[4]!=nullptr && image[2]!=nullptr &&
-            (*image[6]->pixmap() == *image[4]->pixmap()) && (*image[4]->pixmap() == *image[2]->pixmap()))
-        gameOver();
-    else if(image[8]!=nullptr && image[4]!=nullptr && image[0]!=nullptr &&
-            (*image[8]->pixmap() == *image[4]->pixmap()) && (*image[4]->pixmap() == *image[0]->pixmap()))
-        gameOver();
-    else if(stepsForCode>=9)        //if all are filled
+    auto check = [=](const int a, const int b, const int c)
+    {
+        if(image[a]!=nullptr && image[b]!=nullptr && image[c]!=nullptr &&
+                (*image[a]->pixmap() == *image[b]->pixmap()) && (*image[b]->pixmap() == *image[c]->pixmap()))
+        {
+            gameOver();
+            return true;
+        }
+        return false;
+    };
+
+    if(check(6,7,8))
+        return;
+    else if(check(3,4,5))
+        return;
+    else if(check(0,1,2))
+        return;
+    else if(check(6,3,0))
+        return;
+    else if(check(7,4,1))
+        return;
+    else if(check(8,5,2))
+        return;
+    else if(check(6,4,2))
+        return;
+    else if(check(8,4,0))
+        return;
+
+    else if(stepsForCode >= 9)      // if all are filled
     {
         if(language==ENG)
             QMessageBox::information(this, "Info", "Draw!");
@@ -203,17 +201,18 @@ void MainWindow::victoryCheck()
 
 void MainWindow::gameOver()
 {
-    enableButtons(false);           //block buttons during delay acts
+    enableButtons(false);           // block buttons during delay acts
 
-    QTime timer;                    //delay after victory
+    QTime timer;                    // delay after victory
     timer.start();
     for(;timer.elapsed() < 700;)
        qApp->processEvents();
 
-    enableButtons(true);            //unblock after delay completed
+    enableButtons(true);            // unblock after delay completed
 
     resetField();
-    stepsForCode = 0;               //grid is empty
+    stepsForCode = 0;               // grid is empty
+
     if(figure)
         ui->label_scoreCross->setText(QString::number(++crossScore));
     else
@@ -263,110 +262,40 @@ bool MainWindow::closeVictoryControl(int& way)
         else
             checkImg = QPixmap(":/imgs/images/cross2.0.png");
 
-        if(image[6] != nullptr && image[7] != nullptr &&  image[8] == nullptr && (*image[6]->pixmap() == checkImg) && (*image[6]->pixmap() == *image[7]->pixmap()))
-            way=8;
-        else if(image[6] != nullptr && image[8] != nullptr &&  image[7] == nullptr && (*image[6]->pixmap() == checkImg) && (*image[6]->pixmap() == *image[8]->pixmap()))
-            way=7;
-        else if(image[7] != nullptr && image[8] != nullptr &&  image[6] == nullptr && (*image[7]->pixmap() == checkImg) && (*image[7]->pixmap() == *image[8]->pixmap()))
-            way=6;
-        else if(image[3] != nullptr && image[4] != nullptr &&  image[5] == nullptr && (*image[3]->pixmap() == checkImg) && (*image[3]->pixmap() == *image[4]->pixmap()))
-            way=5;
-        else if(image[3] != nullptr && image[5] != nullptr &&  image[4] == nullptr && (*image[3]->pixmap() == checkImg) && (*image[3]->pixmap() == *image[5]->pixmap()))
-            way=4;
-        else if(image[4] != nullptr && image[5] != nullptr &&  image[3] == nullptr && (*image[4]->pixmap() == checkImg) && (*image[4]->pixmap() == *image[5]->pixmap()))
-            way=3;
-        else if(image[0] != nullptr && image[1] != nullptr &&  image[2] == nullptr && (*image[0]->pixmap() == checkImg) && (*image[0]->pixmap() == *image[1]->pixmap()))
-            way=2;
-        else if(image[0] != nullptr && image[2] != nullptr &&  image[1] == nullptr && (*image[0]->pixmap() == checkImg) && (*image[0]->pixmap() == *image[2]->pixmap()))
-            way=1;
-        else if(image[1] != nullptr && image[2] != nullptr &&  image[0] == nullptr && (*image[1]->pixmap() == checkImg) && (*image[1]->pixmap() == *image[2]->pixmap()))
-            way=0;
-        else if(image[6] != nullptr && image[3] != nullptr &&  image[0] == nullptr && (*image[6]->pixmap() == checkImg) && (*image[6]->pixmap() == *image[3]->pixmap()))
-            way=0;
-        else if(image[6] != nullptr && image[0] != nullptr &&  image[3] == nullptr && (*image[6]->pixmap() == checkImg) && (*image[6]->pixmap() == *image[0]->pixmap()))
-            way=3;
-        else if(image[3] != nullptr && image[0] != nullptr &&  image[6] == nullptr && (*image[3]->pixmap() == checkImg) && (*image[3]->pixmap() == *image[0]->pixmap()))
-            way=6;
-        else if(image[7] != nullptr && image[4] != nullptr &&  image[1] == nullptr && (*image[7]->pixmap() == checkImg) && (*image[7]->pixmap() == *image[4]->pixmap()))
-            way=1;
-        else if(image[7] != nullptr && image[1] != nullptr &&  image[4] == nullptr && (*image[7]->pixmap() == checkImg) && (*image[7]->pixmap() == *image[1]->pixmap()))
-            way=4;
-        else if(image[4] != nullptr && image[1] != nullptr &&  image[7] == nullptr && (*image[4]->pixmap() == checkImg) && (*image[4]->pixmap() == *image[1]->pixmap()))
-            way=7;
-        else if(image[8] != nullptr && image[5] != nullptr &&  image[2] == nullptr && (*image[8]->pixmap() == checkImg) && (*image[8]->pixmap() == *image[5]->pixmap()))
-            way=2;
-        else if(image[8] != nullptr && image[2] != nullptr &&  image[5] == nullptr && (*image[8]->pixmap() == checkImg) && (*image[8]->pixmap() == *image[2]->pixmap()))
-            way=5;
-        else if(image[5] != nullptr && image[2] != nullptr &&  image[8] == nullptr && (*image[5]->pixmap() == checkImg) && (*image[5]->pixmap() == *image[2]->pixmap()))
-            way=8;
-        else if(image[0] != nullptr && image[4] != nullptr &&  image[8] == nullptr && (*image[0]->pixmap() == checkImg) && (*image[0]->pixmap() == *image[4]->pixmap()))
-            way=8;
-        else if(image[0] != nullptr && image[8] != nullptr &&  image[4] == nullptr && (*image[0]->pixmap() == checkImg) && (*image[0]->pixmap() == *image[8]->pixmap()))
-            way=4;
-        else if(image[4] != nullptr && image[8] != nullptr &&  image[0] == nullptr && (*image[4]->pixmap() == checkImg) && (*image[4]->pixmap() == *image[8]->pixmap()))
-            way=0;
-        else if(image[6] != nullptr && image[4] != nullptr &&  image[2] == nullptr && (*image[6]->pixmap() == checkImg) && (*image[6]->pixmap() == *image[4]->pixmap()))
-            way=2;
-        else if(image[6] != nullptr && image[2] != nullptr &&  image[4] == nullptr && (*image[6]->pixmap() == checkImg) && (*image[6]->pixmap() == *image[2]->pixmap()))
-            way=4;
-        else if(image[4] != nullptr && image[2] != nullptr &&  image[6] == nullptr && (*image[4]->pixmap() == checkImg) && (*image[4]->pixmap() == *image[2]->pixmap()))
-            way=6;
+        auto check = [&](const int a, const int b, const int c)
+        {
+            if(image[a] != nullptr && image[b] != nullptr &&  image[c] == nullptr && (*image[a]->pixmap() == checkImg) && (*image[a]->pixmap() == *image[b]->pixmap()))
+            {
+                way = c;
+                return true;
+            }
+            return false;
+        };
 
-        if(way > -1)        //if everything doesn't fit function is continuing
+        if(check(6,7,8) || check(6,8,7) || check(7,8,6) || check(3,4,5) || check(3,5,4) || check(4,5,3) || check(0,1,2) || check(0,2,1) ||
+                check(1,2,0) || check(6,3,0) || check(6,0,3) || check(3,0,6) || check(7,4,1) || check(7,1,4) || check(4,1,7) || check(8,5,2) ||
+                check(8,2,5) || check(5,2,8) || check(0,4,8) || check(0,8,4) || check(4,8,0) || check(6,4,2) || check(6,2,4) || check(4,2,6))
             return true;
     }
 
-    if(image[6] != nullptr && image[7] != nullptr &&  image[8] == nullptr && (*image[6]->pixmap() == *image[7]->pixmap()))
-        way=8;
-    else if(image[6] != nullptr && image[8] != nullptr &&  image[7] == nullptr && (*image[6]->pixmap() == *image[8]->pixmap()))
-        way=7;
-    else if(image[7] != nullptr && image[8] != nullptr &&  image[6] == nullptr && (*image[7]->pixmap() == *image[8]->pixmap()))
-        way=6;
-    else if(image[3] != nullptr && image[4] != nullptr &&  image[5] == nullptr && (*image[3]->pixmap() == *image[4]->pixmap()))
-        way=5;
-    else if(image[3] != nullptr && image[5] != nullptr &&  image[4] == nullptr && (*image[3]->pixmap() == *image[5]->pixmap()))
-        way=4;
-    else if(image[4] != nullptr && image[5] != nullptr &&  image[3] == nullptr && (*image[4]->pixmap() == *image[5]->pixmap()))
-        way=3;
-    else if(image[0] != nullptr && image[1] != nullptr &&  image[2] == nullptr && (*image[0]->pixmap() == *image[1]->pixmap()))
-        way=2;
-    else if(image[0] != nullptr && image[2] != nullptr &&  image[1] == nullptr && (*image[0]->pixmap() == *image[2]->pixmap()))
-        way=1;
-    else if(image[1] != nullptr && image[2] != nullptr &&  image[0] == nullptr && (*image[1]->pixmap() == *image[2]->pixmap()))
-        way=0;
-    else if(image[6] != nullptr && image[3] != nullptr &&  image[0] == nullptr && (*image[6]->pixmap() == *image[3]->pixmap()))
-        way=0;
-    else if(image[6] != nullptr && image[0] != nullptr &&  image[3] == nullptr && (*image[6]->pixmap() == *image[0]->pixmap()))
-        way=3;
-    else if(image[3] != nullptr && image[0] != nullptr &&  image[6] == nullptr && (*image[3]->pixmap() == *image[0]->pixmap()))
-        way=6;
-    else if(image[7] != nullptr && image[4] != nullptr &&  image[1] == nullptr && (*image[7]->pixmap() == *image[4]->pixmap()))
-        way=1;
-    else if(image[7] != nullptr && image[1] != nullptr &&  image[4] == nullptr && (*image[7]->pixmap() == *image[1]->pixmap()))
-        way=4;
-    else if(image[4] != nullptr && image[1] != nullptr &&  image[7] == nullptr && (*image[4]->pixmap() == *image[1]->pixmap()))
-        way=7;
-    else if(image[8] != nullptr && image[5] != nullptr &&  image[2] == nullptr && (*image[8]->pixmap() == *image[5]->pixmap()))
-        way=2;
-    else if(image[8] != nullptr && image[2] != nullptr &&  image[5] == nullptr && (*image[8]->pixmap() == *image[2]->pixmap()))
-        way=5;
-    else if(image[5] != nullptr && image[2] != nullptr &&  image[8] == nullptr && (*image[5]->pixmap() == *image[2]->pixmap()))
-        way=8;
-    else if(image[0] != nullptr && image[4] != nullptr &&  image[8] == nullptr && (*image[0]->pixmap() == *image[4]->pixmap()))
-        way=8;
-    else if(image[0] != nullptr && image[8] != nullptr &&  image[4] == nullptr && (*image[0]->pixmap() == *image[8]->pixmap()))
-        way=4;
-    else if(image[4] != nullptr && image[8] != nullptr &&  image[0] == nullptr && (*image[4]->pixmap() == *image[8]->pixmap()))
-        way=0;
-    else if(image[6] != nullptr && image[4] != nullptr &&  image[2] == nullptr && (*image[6]->pixmap() == *image[4]->pixmap()))
-        way=2;
-    else if(image[6] != nullptr && image[2] != nullptr &&  image[4] == nullptr && (*image[6]->pixmap() == *image[2]->pixmap()))
-        way=4;
-    else if(image[4] != nullptr && image[2] != nullptr &&  image[6] == nullptr && (*image[4]->pixmap() == *image[2]->pixmap()))
-        way=6;
-    else
-        return false;       //if everything doesn't fit
-    return true;
+    // If everything doesn't fit then function continuous
+
+    auto checkElse = [&](const int a, const int b, const int c)
+    {
+        if(image[a] != nullptr && image[b] != nullptr &&  image[c] == nullptr && (*image[a]->pixmap() == *image[b]->pixmap()))
+        {
+            way = c;
+            return true;
+        }
+        return false;
+    };
+
+    if(checkElse(6,7,8) || checkElse(6,8,7) || checkElse(7,8,6) || checkElse(3,4,5) || checkElse(3,5,4) || checkElse(4,5,3) || checkElse(0,1,2) || checkElse(0,2,1) ||
+            checkElse(1,2,0) || checkElse(6,3,0) || checkElse(6,0,3) || checkElse(3,0,6) || checkElse(7,4,1) || checkElse(7,1,4) || checkElse(4,1,7) || checkElse(8,5,2) ||
+            checkElse(8,2,5) || checkElse(5,2,8) || checkElse(0,4,8) || checkElse(0,8,4) || checkElse(4,8,0) || checkElse(6,4,2) || checkElse(6,2,4) || checkElse(4,2,6))
+        return true;
+
+    return false;       //if everything doesn't fit
 }
 
 bool MainWindow::newGame()
@@ -382,7 +311,7 @@ bool MainWindow::newGame()
             temp=true;
         break;
     case RUS:
-        QMessageBox tempMes;                //create separate window to its buttons will be with russian words
+        QMessageBox tempMes;                // create separate window to its buttons will be with russian words
         tempMes.setWindowTitle("Сброс");
         tempMes.setWindowIcon(QIcon(":/imgs/images/logo.png"));
         tempMes.setIcon(QMessageBox::Question);
@@ -395,7 +324,7 @@ bool MainWindow::newGame()
         break;
     }
 
-    if(temp)        //if answer is yes
+    if(temp)        // if answer is yes
     {
         resetField();
         ui->label_scoreCross->setText(QString::number(0));
@@ -410,7 +339,7 @@ bool MainWindow::newGame()
     return temp;
 }
 
-void MainWindow::on_actionNew_game_1_vs_1_triggered()       //new game 1 vs 1
+void MainWindow::on_actionNew_game_1_vs_1_triggered()       // new game 1 vs 1
 {
     if(newGame())
     {
@@ -503,11 +432,11 @@ void MainWindow::on_actionInformation_triggered()
 void MainWindow::on_actionCurrent_version_triggered()
 {
     if(language==ENG)
-        QMessageBox::information(this, "Info", "Tic-tac-toe 1.0\n"
-                                       "This is my first window application xD");
+        QMessageBox::information(this, "Info", "Tic-tac-toe 1.01\n -Performance Improvement\n\n"
+                                       "This is my first Windows application xD");
     else
-        QMessageBox::information(this, "Info", "Tic-tac-toe 1.0\n"
-                                       "Это моё первое оконное приложение xD");
+        QMessageBox::information(this, "Info", "Tic-tac-toe 1.01\n -Улучшение производительности\n\n"
+                                       "Это моё первое приложение Windows xD");
 }
 
 void chooseRealOrAI::on_pushButton_selectRing_clicked()
