@@ -6,7 +6,7 @@ chooseDifficulty::chooseDifficulty(QWidget *parent) :
     ui(new Ui::chooseDifficulty)
 {
     ui->setupUi(this);
-
+    //----------------
 
     setWindowTitle("Difficulty");
     setWindowFlags(Qt::WindowTitleHint);
