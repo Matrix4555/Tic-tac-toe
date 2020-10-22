@@ -1,18 +1,26 @@
-#include "chooserealorai.h"
-#include "ui_chooserealorai.h"
+#ifndef CHOOSEREALORAI_H
+#define CHOOSEREALORAI_H
 
-chooseRealOrAI::chooseRealOrAI(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::chooseRealOrAI)
-{
-    ui->setupUi(this);
+#include <QDialog>
 
-
-    setWindowTitle("Mode of game");
-    setWindowFlags(Qt::WindowTitleHint);
+namespace Ui {
+class chooseRealOrAI;
 }
 
-chooseRealOrAI::~chooseRealOrAI()
+class chooseRealOrAI : public QDialog
 {
-    delete ui;
-}
+    Q_OBJECT
+
+public:
+    explicit chooseRealOrAI(QWidget *parent = nullptr);
+    ~chooseRealOrAI();
+
+private slots:
+    void on_pushButton_selectRing_clicked();
+    void on_pushButton_selectCross_clicked();
+
+private:
+    Ui::chooseRealOrAI *ui;
+};
+
+#endif // CHOOSEREALORAI_H
