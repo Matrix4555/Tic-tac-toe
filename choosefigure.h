@@ -14,8 +14,9 @@ class chooseFigure : public QDialog
 public:
     explicit chooseFigure(QWidget *parent = nullptr);
     ~chooseFigure();
+    //--------------
 
-    void changeText(QString);
+    void changeText(QString);   // change text on the top of this window
 
 private slots:
     void on_pushButton_selectRing_clicked();
@@ -23,6 +24,7 @@ private slots:
 
 private:
     Ui::chooseFigure *ui;
+
 };
 
 #endif // CHOOSEFIGURE_H
