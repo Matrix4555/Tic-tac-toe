@@ -14,6 +14,7 @@ class chooseDifficulty : public QDialog
 public:
     explicit chooseDifficulty(QWidget *parent = nullptr);
     ~chooseDifficulty();
+    //------------------
 
     void changeText(QString);
 
@@ -24,6 +25,7 @@ private slots:
 
 private:
     Ui::chooseDifficulty *ui;
+
 };
 
 #endif // CHOOSEDIFFICULTY_H
